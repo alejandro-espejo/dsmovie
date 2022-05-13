@@ -23,6 +23,7 @@ function Listing() {
     });
 
     // useEffect() Recebe dois argumentos, funcao e list de objetos que irá observar
+    // Irá efetuar a atualização de troca de página
     useEffect(() => {
         axios.get(`${BASE_URL}/movies?size=12&page=${pageNumber}&sort=title`)
             .then(response => {
@@ -31,10 +32,14 @@ function Listing() {
             });
     }, [pageNumber]);
 
+    const handlePageChange = (newPageNumber : number) => {
+        setPageNumber(newPageNumber);
+    }
+
     // framgment: <></>
     return (
         <>
-            <Pagination />
+            <Pagination page={page} onChange={handlePageChange}/>
 
             <div className="container">
                 <div className="row">
